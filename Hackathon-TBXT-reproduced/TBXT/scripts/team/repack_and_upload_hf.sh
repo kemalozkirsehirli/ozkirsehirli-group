@@ -11,10 +11,12 @@
 #   bash scripts/team/repack_and_upload_hf.sh --supplement   # also rebuild the pose supplement
 #   bash scripts/team/repack_and_upload_hf.sh --no-env       # skip env repack, refresh CHECKSUMS + push
 #
-# Override the target repo (default = anandsahuofficial/tbxt-hackathon-bundles):
+# Override the target repo (default = <HF_USER>/<HF_REPO>):
 #   HF_USER=<user> HF_REPO=<repo> bash scripts/team/repack_and_upload_hf.sh
 
 set -euo pipefail
+
+: "${HF_USER:?Set HF_USER to your Hugging Face username or organization before running this helper.}"
 
 REBUILD_ENV="true"
 REBUILD_SUPPLEMENT="false"
@@ -27,7 +29,7 @@ for arg in "$@"; do
   esac
 done
 
-HF_USER="${HF_USER:-anandsahuofficial}"
+HF_USER="${HF_USER:-}"
 HF_REPO="${HF_REPO:-tbxt-hackathon-bundles}"
 HF_SSH_REMOTE="git@hf.co:datasets/${HF_USER}/${HF_REPO}"
 

@@ -100,7 +100,7 @@ data/tier_a/
 ## Reproduce
 
 ```bash
-source /home/anandsahu/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
+source $HOME/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
 cd ~/Hackathon/TBXT
 python scripts/dock_gnina.py --smiles-csv data/full_pool_input.csv \
     --site F --out-dir data/full_pool_gnina_F --exhaustiveness 8

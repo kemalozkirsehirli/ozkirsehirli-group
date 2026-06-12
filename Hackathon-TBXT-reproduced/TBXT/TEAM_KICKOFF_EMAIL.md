@@ -32,7 +32,7 @@ All Tier-A on multi-mode docking; pairwise Tanimoto < 0.55 (proper diversity); B
 **Step 1 — Setup (any time today):**
 
 ```bash
-git clone -b TBXT git@github.com:anandsahuofficial/Hackathon.git
+git clone -b TBXT <PUBLIC_REPO_URL>
 cd Hackathon
 bash TBXT/setup.sh
 bash TBXT/smoke_test.sh
@@ -78,4 +78,4 @@ We're optimizing for the **judging prize** ($250 muni credits, scored on rationa
 
 Read `TBXT/TEAM_PLAYBOOK_6.md` for the full pre-event plan and `TBXT/PROGRESS.md` Phase 8 for the production run details.
 
-— Anand
+— TBXT Hackathon Team

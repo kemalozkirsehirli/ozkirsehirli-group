@@ -6,7 +6,7 @@
 
 ```bash
 # 1. Clone the repo anywhere
-git clone git@github.com:anandsahuofficial/Hackathon.git ~/Hackathon
+git clone <PUBLIC_REPO_URL> ~/Hackathon
 cd ~/Hackathon/TBXT
 
 # 2. Run setup. Defaults to ~/Hackathon; pass a path arg to override.
@@ -47,7 +47,7 @@ That's it. The script is idempotent — safe to re-run if something glitches.
 
 ## Drive folder
 
-Bundles are at: **https://drive.google.com/drive/folders/100ivRu-oFAL6fmvjqaHiBRaycGI3yP41?usp=sharing**
+Bundles are at: **EXTERNAL_ASSET_BUNDLE_URL_REDACTED**
 
 setup.sh downloads them automatically from public file IDs hardcoded in the script. You don't need a Google account.
 
@@ -83,7 +83,7 @@ The bundles are already uploaded to Drive and the repo is on GitHub. The steps b
 ## Step 1: prepare the git repo
 
 ```bash
-cd /home/anandsahu/Hackathon/TBXT
+cd $HOME/Hackathon/TBXT
 
 # Init repo if not already
 git init -b main
@@ -123,11 +123,11 @@ Repo size after gitignore: ~50 MB (manageable for clone).
 
 ```bash
 # Install conda-pack into base
-/home/anandsahu/miniconda3/bin/conda install -n base -c conda-forge -y conda-pack
+$HOME/miniconda3/bin/conda install -n base -c conda-forge -y conda-pack
 
 # Pack the tbxt env
 cd /tmp
-/home/anandsahu/miniconda3/bin/conda-pack -n tbxt -o tbxt_env.tar.gz \
+$HOME/miniconda3/bin/conda-pack -n tbxt -o tbxt_env.tar.gz \
     --ignore-missing-files --exclude '*.pyc' --exclude '__pycache__'
 
 ls -lh tbxt_env.tar.gz   # expect ~3-4 GB
@@ -137,10 +137,10 @@ ls -lh tbxt_env.tar.gz   # expect ~3-4 GB
 
 ```bash
 mkdir -p /tmp/tbxt_data_bundle
-cp /home/anandsahu/Hackathon/TBXT/bin/gnina /tmp/tbxt_data_bundle/        # 2 GB
-cp /home/anandsahu/Hackathon/TBXT/data/naar/*.xlsx /tmp/tbxt_data_bundle/ # 180 MB
-cp -r /home/anandsahu/Hackathon/TBXT/data/naar/spr_decrypted /tmp/tbxt_data_bundle/  # 180 MB
-cp /home/anandsahu/Hackathon/TBXT/data/dock/receptor/*.cif /tmp/tbxt_data_bundle/    # ~1 MB
+cp $HOME/Hackathon/TBXT/bin/gnina /tmp/tbxt_data_bundle/        # 2 GB
+cp $HOME/Hackathon/TBXT/data/naar/*.xlsx /tmp/tbxt_data_bundle/ # 180 MB
+cp -r $HOME/Hackathon/TBXT/data/naar/spr_decrypted /tmp/tbxt_data_bundle/  # 180 MB
+cp $HOME/Hackathon/TBXT/data/dock/receptor/*.cif /tmp/tbxt_data_bundle/    # ~1 MB
 cd /tmp
 tar -czf tbxt_data_bundle.tar.gz tbxt_data_bundle/
 ls -lh tbxt_data_bundle.tar.gz   # expect ~2.5 GB
@@ -148,7 +148,7 @@ ls -lh tbxt_data_bundle.tar.gz   # expect ~2.5 GB
 
 ## Step 4: upload to Drive
 
-Drive folder: **https://drive.google.com/drive/folders/100ivRu-oFAL6fmvjqaHiBRaycGI3yP41?usp=sharing**
+External asset bundle folder (redacted): **EXTERNAL_ASSET_BUNDLE_URL_REDACTED**
 
 Upload these from `/tmp/tbxt_drive/`:
 - `tbxt_env.tar.gz` (9.9 GB) — packed conda env
@@ -184,12 +184,12 @@ rclone copy MANIFEST_data_bundle.txt drive:TBXT_handoff/
 # Time: ~30 min per member (mostly download time)
 
 # 1. Clone the repo
-git clone git@github.com:anandsahuofficial/Hackathon.git ~/tbxt
+git clone <PUBLIC_REPO_URL> ~/tbxt
 cd ~/tbxt
 git checkout TBXT     # the event branch with all the work
 
 # 2. Download the env tarball + data bundle from Drive folder
-#    https://drive.google.com/drive/folders/100ivRu-oFAL6fmvjqaHiBRaycGI3yP41?usp=sharing
+#    EXTERNAL_ASSET_BUNDLE_URL_REDACTED
 #
 #    Click each file in the Drive UI to get a direct download URL, OR use gdown:
 pip install gdown

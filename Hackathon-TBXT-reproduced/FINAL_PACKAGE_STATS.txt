@@ -1,0 +1,7 @@
+Final public GitHub repository package stats
+
+Root folder: Hackathon-TBXT/
+Files in manifest: 280
+macOS metadata: removed
+License SHA256: dea0b6ab40cd2bb0ee371482ea303f532f3c4e85a103e0dfd0c81d4d0ae919c1
+Public-release safety pass: applied

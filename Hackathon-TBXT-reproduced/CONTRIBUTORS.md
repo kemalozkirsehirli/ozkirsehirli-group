@@ -1,30 +1,17 @@
-# Contributors and Attribution
+# Contributors
 
-This reproduced repository was prepared from the supplied `Hackathon-TBXT`
-project archive for continued TBXT/brachyury small-molecule hit-identification
-research.
+This file lists public contributor attribution for the `Hackathon-TBXT` research release. It separates historical contribution credit from current GitHub repository maintenance.
 
-## Current reproduced-release maintainership
+| Contributor | Contribution / role | Current repository status |
+|---|---|---|
+| Kemal Özkırşehirli | Student Principal Investigator, Özkırşehirli Group and TBXT Small-Molecule Hackathon; project lead for the public research release; CADD/AI workflow integrator; maintainer/contact. | Current public repository maintainer/contact. |
+| Anand Sahu | Historical contributor to material preserved from the source archive. | Historical contributor attribution preserved. |
+| TBXT Small-Molecule Hackathon Contributors | Historical team contributions to code, scripts, analysis, reports, dashboards, and candidate-selection artifacts where applicable. | Historical contributor attribution preserved. |
 
-| Person / group | Public role / contribution note |
-|---|---|
-| Kemal Özkırşehirli / Özkırşehirli Group | Student Principal Investigator / project lead for the TBXT Small-Molecule Hackathon work; maintaining lead of this reproduced release. |
+## Maintainer boundary
 
-## Historical contributors and preserved attribution
+Current GitHub repository maintainers are listed in `MAINTAINERS.md`. Historical contribution credit is not the same thing as repository write access, release authority, or authorization to speak for the current public repository.
 
-| Person / group | Public role / contribution note |
-|---|---|
-| Anand Sahu | Historical contributor and co-owner/contributor to portions of the original archive where applicable. Attribution is preserved for work present in the archive. Anand Sahu is not listed as a maintainer of this reproduced release. |
-| Other TBXT hackathon contributors | Add names and contributions as verified before making broad public claims about the team. |
+## Correction process
 
-## Publication rule
-
-Public README, citation, and license notices should distinguish:
-
-1. **Current maintainership** of this reproduced release; and
-2. **Historical contribution / provenance** of the original hackathon archive.
-
-Do not remove attribution for work you did not solely create. If there is a
-leadership or ownership dispute, keep claims factual, avoid personal allegations
-in repository files, and preserve evidence privately rather than embedding it in
-LICENSE or README.
+Open an issue or pull request for attribution corrections. Include concrete evidence and avoid personal allegations.

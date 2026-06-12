@@ -4,7 +4,7 @@
 **Date:** 2026-05-09 · **Event:** TBXT Hit Identification Hackathon, Pillar VC Boston, hosted by muni.bio
 **Team Name:** `<TEAM_BASE>-A` (replace `<TEAM_BASE>` with chosen base, e.g. `Brachyury Pillar Hunters`)
 **Members:** `<NAME 1>, <NAME 2>` *(fill in)*
-**Project lead:** Anand Sahu
+**Current reproduced-release lead:** Kemal Özkırşehirli
 
 ## 4 Ranked Compounds
 

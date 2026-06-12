@@ -12,12 +12,14 @@
 # Usage:
 #   bash scripts/team/setup_hf_ssh_once.sh
 #
-# Override target repo (default: anandsahuofficial/tbxt-hackathon-bundles):
+# Override target repo (default: <HF_USER>/<HF_REPO>):
 #   HF_USER=<user> HF_REPO=<repo> bash scripts/team/setup_hf_ssh_once.sh
 
 set -euo pipefail
 
-HF_USER="${HF_USER:-anandsahuofficial}"
+: "${HF_USER:?Set HF_USER to your Hugging Face username or organization before running this helper.}"
+
+HF_USER="${HF_USER:-}"
 HF_REPO="${HF_REPO:-tbxt-hackathon-bundles}"
 HF_SSH_REMOTE="git@hf.co:datasets/${HF_USER}/${HF_REPO}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

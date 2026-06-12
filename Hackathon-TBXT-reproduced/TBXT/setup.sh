@@ -35,6 +35,7 @@ for arg in "$@"; do
 done
 
 # ─── Configuration ─────────────────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TBXT_ROOT="${TBXT_ROOT:-${POSITIONAL_ARG:-$HOME}}"
 CLONE_DIR="$TBXT_ROOT/Hackathon"
 PROJECT_DIR="$CLONE_DIR/TBXT"
@@ -43,16 +44,23 @@ ENV_NAME="tbxt"
 ENV_DIR="$CONDA_DIR/envs/$ENV_NAME"
 DOWNLOAD_CACHE="${TBXT_DOWNLOAD_CACHE:-$HOME/.tbxt_drive_cache}"
 
-# Drive file IDs (public — anyone-with-link)
-ID_ENV="1G88JAl11RxbzrA_YJinC-ihF556oWYOo"
-ID_DATA="1bIt-i083BhIqO83vGx2mHjFokUGhedQG"
-ID_CHECKSUMS="12K_DjcSEeaGojCHCEgMxYGQByIx48mQY"
-ID_MANIFEST="1Ob6cBitmqw3XcYIXnT1r7204niNUa5F8"
-# Supplement: docked poses + ligands needed by task5/6/8/9 (~2 MB).
-ID_SUPPLEMENT="${ID_SUPPLEMENT:-1aOFQDBWWR3534j1pJO8fd3MNDKiN0mne}"
-REPO_URL="git@github.com:anandsahuofficial/Hackathon.git"
-REPO_HTTPS="https://github.com/anandsahuofficial/Hackathon.git"
-BRANCH="TBXT"
+# External bundle file IDs.
+# Public-release safety: hardcoded Google Drive IDs were removed. If you control
+# the external bundles and have the right to distribute them, pass IDs through
+# environment variables before running this script:
+#   export ID_ENV="..."
+#   export ID_DATA="..."
+#   export ID_CHECKSUMS="..."
+#   export ID_MANIFEST="..."
+#   export ID_SUPPLEMENT="..."   # optional
+ID_ENV="${ID_ENV:-${TBXT_ID_ENV:-}}"
+ID_DATA="${ID_DATA:-${TBXT_ID_DATA:-}}"
+ID_CHECKSUMS="${ID_CHECKSUMS:-${TBXT_ID_CHECKSUMS:-}}"
+ID_MANIFEST="${ID_MANIFEST:-${TBXT_ID_MANIFEST:-}}"
+ID_SUPPLEMENT="${ID_SUPPLEMENT:-${TBXT_ID_SUPPLEMENT:-}}"
+REPO_URL="${TBXT_REPO_URL:-}"
+REPO_HTTPS="${TBXT_REPO_HTTPS:-}"
+BRANCH="${TBXT_BRANCH:-main}"
 
 # ─── Helpers ────────────────────────────────────────────────────────────────
 log() { printf "\n[\033[36msetup\033[0m %s] %s\n" "$(date +%H:%M:%S)" "$*"; }
@@ -117,7 +125,7 @@ all downloaders.
 
 Workarounds (in order of speed):
   1. Wait ~24 h and retry.
-  2. Ask the file owner (Anand) to right-click the file in Drive
+  2. Ask the current maintainer or file owner to right-click the file in Drive
      → "Make a copy" (creates a new file ID with a fresh quota counter)
      → share the new ID; pass it via env on retry, e.g.:
          ID_ENV=<newid> bash setup.sh
@@ -157,23 +165,55 @@ else
   log "Miniconda already present at $CONDA_DIR"
 fi
 
-# ─── Step 2: clone / update the repo ────────────────────────────────────────
-log "Setting up repo at $CLONE_DIR..."
-mkdir -p "$TBXT_ROOT"
-if [ ! -d "$CLONE_DIR/.git" ]; then
-  if ! git clone "$REPO_URL" "$CLONE_DIR" 2>/dev/null; then
-    log "  SSH clone failed, trying HTTPS..."
+# ─── Step 2: locate / optionally clone the repo ──────────────────────────────
+log "Locating repository..."
+
+# Public-release behavior:
+# - If this script is run from inside a cloned repository, use that checkout.
+# - If no checkout exists at $CLONE_DIR, set TBXT_REPO_URL or TBXT_REPO_HTTPS to clone one.
+# This avoids hardcoding a former private upstream repository in the public release.
+if [ -f "$SCRIPT_DIR/tests/smoke_test.py" ] && [ -d "$SCRIPT_DIR/scripts" ]; then
+  PROJECT_DIR="$SCRIPT_DIR"
+  CLONE_DIR="$(dirname "$PROJECT_DIR")"
+  log "  using current checkout: $PROJECT_DIR"
+elif [ ! -d "$CLONE_DIR/.git" ]; then
+  mkdir -p "$TBXT_ROOT"
+  if [ -n "$REPO_URL" ]; then
+    git clone "$REPO_URL" "$CLONE_DIR"
+  elif [ -n "$REPO_HTTPS" ]; then
     git clone "$REPO_HTTPS" "$CLONE_DIR"
+  else
+    err "No checkout found at $CLONE_DIR and no TBXT_REPO_URL/TBXT_REPO_HTTPS provided. Clone the public GitHub repository first, then run TBXT/$(basename "$0")."
   fi
 else
-  log "  repo exists; pulling latest"
+  log "  repo exists; pulling latest when possible"
   (cd "$CLONE_DIR" && git fetch --all --quiet && git checkout "$BRANCH" --quiet && git pull --quiet) || true
 fi
-(cd "$CLONE_DIR" && git checkout "$BRANCH" 2>/dev/null) || true
-[ -d "$PROJECT_DIR" ] || err "PROJECT_DIR ($PROJECT_DIR) not found after clone"
+
+[ -d "$PROJECT_DIR" ] || err "PROJECT_DIR ($PROJECT_DIR) not found"
 
 # ─── Step 3: download Drive bundle ──────────────────────────────────────────
 mkdir -p "$DOWNLOAD_CACHE"
+log "Preparing external bundle downloads/cache..."
+
+if [ -z "$ID_CHECKSUMS" ] || [ -z "$ID_MANIFEST" ] || [ -z "$ID_DATA" ] || [ -z "$ID_ENV" ]; then
+  cat >&2 <<EOF
+
+[ERROR] This public release does not include hardcoded external Google Drive IDs.
+Provide the required bundle IDs as environment variables, or place the expected
+files in the cache and adapt this script locally:
+
+  export ID_ENV="YOUR_ENV_TARBALL_DRIVE_ID"
+  export ID_DATA="YOUR_DATA_TARBALL_DRIVE_ID"
+  export ID_CHECKSUMS="YOUR_CHECKSUMS_DRIVE_ID"
+  export ID_MANIFEST="YOUR_MANIFEST_DRIVE_ID"
+  # optional:
+  export ID_SUPPLEMENT="YOUR_SUPPLEMENT_DRIVE_ID"
+
+EOF
+  exit 1
+fi
+
 log "Downloading bundles to $DOWNLOAD_CACHE..."
 
 # In --update mode, force re-fetch of CHECKSUMS to detect changes on Drive
@@ -321,7 +361,7 @@ else
 fi
 
 # ─── Step 5b: post-install env patches ─────────────────────────────────────
-# Older Drive bundles ship torchvision==0.24.1 (CUDA wheel) ABI-broken against
+# Older External asset bundles ship torchvision==0.24.1 (CUDA wheel) ABI-broken against
 # torch 2.8.0 (CPU). The new bundle (post 2026-05-08) ships matched wheels,
 # but this step is idempotent: it verifies imports + auto-installs the right
 # variant for your hardware (CUDA 12.8 if NVIDIA GPU detected, else CPU).

@@ -3,7 +3,7 @@
 # Run before May 9 doors open AND right before lock-down at 6:00 pm.
 set -euo pipefail
 
-TBXT="/home/anandsahu/Hackathon/TBXT"
+TBXT="$HOME/Hackathon/TBXT"
 TS="${1:-T-0}"  # default tag; pass a custom tag like "post-onday-3pm" to override
 SNAP_DIR="$TBXT/data/snapshots/$TS"
 
@@ -50,10 +50,10 @@ echo "  Computing manifest..."
 echo "  Recording env..."
 {
     echo "# Conda env: tbxt"
-    /home/anandsahu/miniconda3/envs/tbxt/bin/conda list -n tbxt 2>&1
+    $HOME/miniconda3/envs/tbxt/bin/conda list -n tbxt 2>&1
     echo
     echo "# Python pip freeze (combined)"
-    /home/anandsahu/miniconda3/envs/tbxt/bin/pip freeze 2>&1
+    $HOME/miniconda3/envs/tbxt/bin/pip freeze 2>&1
 } > "$SNAP_DIR/env.txt"
 
 # Report

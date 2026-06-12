@@ -4,7 +4,7 @@
 **Sites:** F (Y88 / D177 / L42 anchor — TBXT-unique residues)
 **Receptor:** PDB 6F59 chain A (G177D variant)
 **Date:** 2026-05-09
-**Project lead / methodology / live demo:** Anand Sahu
+**Current reproduced-release lead / CADD-AI workflow:** Kemal Özkırşehirli
 
 > **v3 change vs v2 SUBMISSION.md:** All 4 picks swapped after T-0 clarification that final picks must (1) be 100% onepot.ai catalog match (similarity = 1.000 in the muni.bio `onepot` tool), (2) be strictly non-covalent (no boronic acids — they're reversible covalent), and (3) Tanimoto < 0.85 to all organizer-provided databases (Naar SPR, TEP fragments, prior_art_canonical). Previous picks (`gen_0007`, `gen_0004`, `Z795991852_analog_0021`, `Z795991852_analog_0087`) failed criterion 1 (max 86% similarity, most 41–53%). New picks all come from our Boltz-validated FM_* family that was already in our 570-compound pool.
 

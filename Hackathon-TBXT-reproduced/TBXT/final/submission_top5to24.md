@@ -1,6 +1,6 @@
 # TBXT Hackathon — Submission (additional 20 picks; experimental program first batch)
 
-**Project lead:** Anand Sahu · **Date:** 2026-05-09
+**Current reproduced-release lead:** Kemal Özkırşehirli · **Date:** 2026-05-09
 
 This file documents the **20 additional team submissions** (ranks 5-24)
 beyond the 4 picks presented to judges (`submission_top4.md`).

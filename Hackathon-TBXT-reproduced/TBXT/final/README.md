@@ -1,7 +1,7 @@
 # Final Submission Bundle — TBXT Hit Identification Hackathon
 
 **Date:** 2026-05-09 · **Submission deadline:** 7 PM today
-**Project lead:** Anand Sahu
+**Current reproduced-release lead:** Kemal Özkırşehirli
 
 This directory is the **single source of truth** for the team's final
 submission. Everything you need to (a) submit the 4 picks for hackathon

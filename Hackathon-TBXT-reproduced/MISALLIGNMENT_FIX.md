@@ -36,7 +36,7 @@ Potential Solutions:
 
 1. Check if openpot.ai (https://www.onepot.ai/) have public access (even partially) just to see what is there workflow science-wise and implementation, and our codebase will connect or will adapt quickly to use onepot.ai.
 
-2. See what are scientific white paper/literature/research of openpot.ai, if we understand what are scientific principles onepot.ai is based on we can either implement our own clone from their white paper or adjacent parallel implementation based on same scientific principles (see https://www.onepot.ai/research) 
+2. See what are scientific white paper/literature/research of openpot.ai, if we understand what are scientific principles onepot.ai is based on we can either build an independent, terms-compliant workflow from public literature or adjacent parallel implementation based on same scientific principles (see https://www.onepot.ai/research) 
 
 
 ### 2. Onepot 7-reaction synthesis filter — **chemistry gate**
@@ -47,7 +47,7 @@ We haven't audited any of our 4 picks (or 100, or 500) for retrosynthesizability
 
 Potential Solutions:
 
-Same as above, see what are scientific white paper/literature/research of openpot.ai for for retrosynthesizability, if we understand what are scientific principles onepot.ai is based on we can either implement our own clone from their white paper or adjacent parallel implementation based on same scientific principles (see https://www.onepot.ai/research)
+Same as above, see what are scientific white paper/literature/research of openpot.ai for for retrosynthesizability, if we understand what are scientific principles onepot.ai is based on we can either build an independent, terms-compliant workflow from public literature or adjacent parallel implementation based on same scientific principles (see https://www.onepot.ai/research)
 
 The fundamental chemistry science and principle for retrosynthesizability must exactly same, just the implementation might be different, we use the same principle for retrosynthesizability on which the provided platform build their workflow and even same data if publically available
 

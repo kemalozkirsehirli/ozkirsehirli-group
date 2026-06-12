@@ -333,7 +333,7 @@ def main():
     md.append("**Sites:** F (Y88 / D177 / L42 anchor — TBXT-unique residues) and A (dimerization-interface secondary site)")
     md.append("**Receptor:** PDB 6F59 chain A (G177D variant)")
     md.append("**Date:** 2026-05-09")
-    md.append("**Team lead:** Anand Sahu")
+    md.append("**Current reproduced-release lead:** Kemal Özkırşehirli")
     md.append("")
     md.append("## Top 4 picks (ordered by consensus composite)")
     md.append("")

@@ -2,7 +2,7 @@
 
 > **As of 2026-05-08 (T-1 day to event on 2026-05-09).** This document is the canonical pre-event work log: what we did, what we found, why it matters, and what to do next. Update during the event with `[T+Hh]` timestamps.
 
-> **For a fresh Claude session starting from this file:** The plan is locked in `TEAM_HANDOFF.md` (winning strategy + role-by-role tasks). The handoff package is ready (GitHub: `git@github.com:anandsahuofficial/Hackathon.git`, branch `TBXT`; Drive bundles uploaded). **Each team member runs exactly 4 commands**: `git clone -b TBXT …`, `bash TBXT/setup.sh`, `bash TBXT/smoke_test.sh`, `bash TBXT/experiment_scripts/task<N>.sh`. Each `task<N>.sh` is self-contained (env activation, checkpointing, JSON report) — no manual setup, no python invocations, no exports. The remaining scope is mostly team execution + on-day workflow per `dashboard/11_on_day_playbook.md`. There is **no per-Claude-session work blocked** — the team owns the work from here.
+> **For a fresh Claude session starting from this file:** The plan is locked in `TEAM_HANDOFF.md` (winning strategy + role-by-role tasks). The handoff package is ready (GitHub: `<PUBLIC_REPO_URL>`, branch `TBXT`; External asset bundles uploaded). **Each team member runs exactly 4 commands**: `git clone -b TBXT …`, `bash TBXT/setup.sh`, `bash TBXT/smoke_test.sh`, `bash TBXT/experiment_scripts/task<N>.sh`. Each `task<N>.sh` is self-contained (env activation, checkpointing, JSON report) — no manual setup, no python invocations, no exports. The remaining scope is mostly team execution + on-day workflow per `dashboard/11_on_day_playbook.md`. There is **no per-Claude-session work blocked** — the team owns the work from here.
 
 ---
 
@@ -56,7 +56,7 @@
 
 ```bash
 # Activate env (built from conda-forge with rdkit, pandas, openpyxl, etc.)
-source /home/anandsahu/miniconda3/etc/profile.d/conda.sh
+source $HOME/miniconda3/etc/profile.d/conda.sh
 conda activate tbxt
 
 # Rebuild the inventory + similarity pairs
@@ -73,7 +73,7 @@ conda create -n tbxt -y --override-channels -c conda-forge \
 
 ## 3. Status (one paragraph)
 
-**As of T-1 day (2026-05-08 evening).** All eight high-leverage strategies attempted; six fully validated, one partial (MMGBSA — energy decomp bug, recoverable post-event by Task-5 owner), two blocked-on-day (pharmacophore + AL on Onepot). The orthogonal-signal stack: **Vina ensemble (6 receptor confs) + GNINA CNN scoring (pose + affinity) + TBXT-specific QSAR (Spearman ρ 0.49 on 650 measured Kd) + Boltz-2 co-folding (Kd within 6-8× of real, prob_binder cleanly classifies binder-vs-fragment) + T-box family selectivity (G177/M181/T183 ~unique to TBXT)**. Pre-event candidate pool: **570 compounds** (503 enumerated analogs + 67 generative proposals), all property-passing, Tanimoto < 0.85 to all 2274 known. **GNINA full-pool docking complete: 40 Tier-A candidates surfaced**, 73 Vina-traps caught + downweighted. **Top Tier-A picks**: `gen_0004` (0.35 µM predicted), `Z795991852_analog_0087` (0.89 µM), `gen_0025` (0.51 µM), `Z795991852_analog_0051` (2.90 µM). **Team handoff package shipped**: `TEAM_HANDOFF.md` (winning plan), 12 dashboard briefs, `setup.sh` + `smoke_test.sh` (one-shot install + verify), and **`experiment_scripts/` — 10 self-contained `task<N>.sh` scripts** (1 554 lines total) so each member runs exactly **4 commands**: `git clone -b TBXT …`, `bash TBXT/setup.sh`, `bash TBXT/smoke_test.sh`, `bash TBXT/experiment_scripts/task<N>.sh` — no env activation, python invocation, or exports. Scripts adopt EDL-pipeline patterns: `--trial N` isolation, `--test` fast mode, `--restart` with `backup_<ts>` (no deletion), skip-if-OK gating via JSON status, resume-from-checkpoint, JSON-only sharing model (raw data stays local; report uploaded to Drive). `task10.sh` is the coordinator's consensus aggregator (supports partial inputs); `pipeline_status.sh` reads only JSONs (safe on a bare machine). All 10 scripts validated end-to-end with `--test` (5 OK / 2 FAIL / 2 PARTIAL — exactly reflecting actual prereq state). **GitHub**: `git@github.com:anandsahuofficial/Hackathon.git` (private), branch `TBXT`, latest commit `bb7029b`. **Drive bundles** uploaded (env 9.9 GB + data 1.6 GB), file IDs hardcoded into `setup.sh`. Local backup at `TBXT/tbxt_drive_local/`. Outstanding: team role assignments (`dashboard/MEMBERS.md` blank — for the user to fill) + on-day execution.
+**As of T-1 day (2026-05-08 evening).** All eight high-leverage strategies attempted; six fully validated, one partial (MMGBSA — energy decomp bug, recoverable post-event by Task-5 owner), two blocked-on-day (pharmacophore + AL on Onepot). The orthogonal-signal stack: **Vina ensemble (6 receptor confs) + GNINA CNN scoring (pose + affinity) + TBXT-specific QSAR (Spearman ρ 0.49 on 650 measured Kd) + Boltz-2 co-folding (Kd within 6-8× of real, prob_binder cleanly classifies binder-vs-fragment) + T-box family selectivity (G177/M181/T183 ~unique to TBXT)**. Pre-event candidate pool: **570 compounds** (503 enumerated analogs + 67 generative proposals), all property-passing, Tanimoto < 0.85 to all 2274 known. **GNINA full-pool docking complete: 40 Tier-A candidates surfaced**, 73 Vina-traps caught + downweighted. **Top Tier-A picks**: `gen_0004` (0.35 µM predicted), `Z795991852_analog_0087` (0.89 µM), `gen_0025` (0.51 µM), `Z795991852_analog_0051` (2.90 µM). **Team handoff package shipped**: `TEAM_HANDOFF.md` (winning plan), 12 dashboard briefs, `setup.sh` + `smoke_test.sh` (one-shot install + verify), and **`experiment_scripts/` — 10 self-contained `task<N>.sh` scripts** (1 554 lines total) so each member runs exactly **4 commands**: `git clone -b TBXT …`, `bash TBXT/setup.sh`, `bash TBXT/smoke_test.sh`, `bash TBXT/experiment_scripts/task<N>.sh` — no env activation, python invocation, or exports. Scripts adopt EDL-pipeline patterns: `--trial N` isolation, `--test` fast mode, `--restart` with `backup_<ts>` (no deletion), skip-if-OK gating via JSON status, resume-from-checkpoint, JSON-only sharing model (raw data stays local; report uploaded to Drive). `task10.sh` is the coordinator's consensus aggregator (supports partial inputs); `pipeline_status.sh` reads only JSONs (safe on a bare machine). All 10 scripts validated end-to-end with `--test` (5 OK / 2 FAIL / 2 PARTIAL — exactly reflecting actual prereq state). **GitHub**: `<PUBLIC_REPO_URL>` (private), branch `TBXT`, latest commit `bb7029b`. **External asset bundles** uploaded (env 9.9 GB + data 1.6 GB), file IDs hardcoded into `setup.sh`. Local backup at `TBXT/tbxt_drive_local/`. Outstanding: team role assignments (`dashboard/MEMBERS.md` blank — for the user to fill) + on-day execution.
 
 ---
 
@@ -213,16 +213,16 @@ Artifacts produced:
 - **`TEAM_HANDOFF.md`** — winning plan: Tier-1 (judging, must-secure) + Tier-2 (≤ 5 µM experimental, real shot) + 11 highest-EV moves with compute budget (~95 GPU-h committed = 19% of pool, 81% slack), critical path diagram, risk register, role definitions (Coordinator + 4 GPU-compute owners + 1 CPU owner + 2 chemists + slides + presenter = 10 positions), final 4-pick selection rule, on-day timeline.
 - **`dashboard/`** — 12 task briefs (00 setup → 11 on-day playbook) + `MEMBERS.md` (empty assignment matrix) + `LIVE_TRACKER.md` (shared status board). Each brief has: goal, what-you're-given, how-to-run (copy-paste commands), success criteria, what-to-post format, fail-mode fixes.
 - **`scripts/team/`** — 5 helper scripts: `dock_gnina_multiseed.py` (Task 2; kills CNN pose run-to-run variance via 10-seed averaging), `aggregate_consensus.py` (Task 10; merges all signals into composite-ranked Tier-A), `render_poses.py` (Task 9; PyMOL + RDKit slide assets), `onepot_filter.py` (on-day; Onepot-membership filter with 3 mode stubs), `setup_check.sh` (12 import + path checks).
-- **GitHub repo**: `git@github.com:anandsahuofficial/Hackathon.git` (private, SSH), branches `master` (agnostic) + `TBXT` (event). 77 files committed; `.gitignore` excludes 11 GB of bundles, 2 GB GNINA binary, 360 MB SPR XLSX, all docking poses + Boltz model intermediates + QSAR pickles + result CSVs. Code + docs only in git (~1 MB total).
-- **Drive bundles** (uploaded by user, public): env tarball `1G88JAl11RxbzrA_YJinC-ihF556oWYOo` (9.9 GB), data bundle `1bIt-i083BhIqO83vGx2mHjFokUGhedQG` (1.6 GB), checksums `12K_DjcSEeaGojCHCEgMxYGQByIx48mQY`, manifest `1Ob6cBitmqw3XcYIXnT1r7204niNUa5F8`. Direct-download URL pattern: `https://drive.usercontent.google.com/download?id=<ID>&export=download&authuser=0&confirm=t` (works with wget/curl, no auth).
+- **GitHub repo**: `<PUBLIC_REPO_URL>` (private, SSH), branches `master` (agnostic) + `TBXT` (event). 77 files committed; `.gitignore` excludes 11 GB of bundles, 2 GB GNINA binary, 360 MB SPR XLSX, all docking poses + Boltz model intermediates + QSAR pickles + result CSVs. Code + docs only in git (~1 MB total).
+- **External asset bundles** (recorded in source archive; access IDs redacted for public release): env tarball `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID` (9.9 GB), data bundle `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID` (1.6 GB), checksums `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID`, manifest `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID`. Direct-download URL pattern redacted for public release. Provide external asset IDs only if you control the files and have distribution rights.
 - **`setup.sh`** + **`smoke_test.sh`** — one-shot installer (clone → install miniconda if absent → download from Drive with SHA-256 verify → unpack env via conda-pack/conda-unpack → unpack data → run setup_check) + a thin wrapper that activates env + runs the 7-step pipeline test on 1 compound (~5 sec). Member workflow: 5 commands total (mkdir/cd, git clone, cd, bash setup.sh, bash smoke_test.sh). No python invocations, no exports, no conda activate.
-- **Path-portable refactor**: all 17 existing scripts (`scripts/*.py`) had hardcoded `/home/anandsahu/Hackathon/TBXT/...` paths; replaced with `Path(__file__).resolve().parents[1] / "..."` so the project root works from any machine path. Verified by extracting the data bundle to `/tmp/test_member/Hackathon/TBXT/` and confirming `scripts/dock.py` and `tests/smoke_test.py` both run cleanly from there.
+- **Path-portable refactor**: all 17 existing scripts (`scripts/*.py`) had hardcoded `$HOME/Hackathon/TBXT/...` paths; replaced with `Path(__file__).resolve().parents[1] / "..."` so the project root works from any machine path. Verified by extracting the data bundle to `/tmp/test_member/Hackathon/TBXT/` and confirming `scripts/dock.py` and `tests/smoke_test.py` both run cleanly from there.
 - **Local Drive backup** at `TBXT/tbxt_drive_local/` (11 GB, gitignored). Use via `TBXT_DOWNLOAD_CACHE=$TBXT_ROOT/Hackathon/TBXT/tbxt_drive_local bash setup.sh` to skip Drive download during testing.
 
 **Tested member workflow (verified 2026-05-08 evening):**
 ```bash
 mkdir -p /tmp/TEST_TBTX && cd /tmp/TEST_TBTX
-git clone -b TBXT git@github.com:anandsahuofficial/Hackathon.git
+git clone -b TBXT <PUBLIC_REPO_URL>
 cd Hackathon/TBXT
 bash setup.sh /tmp/TEST_TBTX
 bash smoke_test.sh
@@ -247,7 +247,7 @@ End-to-end completes in ~15 min on first run (5 min if Drive cache exists), smok
 The dashboard briefs from Phase 5c required members to manually copy-paste shell commands (env activation, exports, python invocations). This phase **replaces every manual step with a single self-contained bash script per task**. After Phase 6, each team member runs exactly **4 commands**:
 
 ```bash
-git clone -b TBXT git@github.com:anandsahuofficial/Hackathon.git
+git clone -b TBXT <PUBLIC_REPO_URL>
 cd Hackathon
 bash TBXT/setup.sh
 bash TBXT/smoke_test.sh
@@ -373,7 +373,7 @@ If the on-day Onepot library reveal contains very few of our 4 final picks, we g
 
 | Member | Tasks | Compute | Wall-clock |
 |---|---|---|---|
-| **M1 (lead, Anand)** | task1 (email), task9 (Vina ensemble), task10 (consensus + final picks) | CPU + light orchestration | ~3 h work + many task10 reruns |
+| **M1 (lead / coordination)** | task1 (email), task9 (Vina ensemble), task10 (consensus + final picks) | CPU + light orchestration | ~3 h work + many task10 reruns |
 | **M2** | task2 (multi-seed GNINA at site F), task3 (site-A pool dock) | A100 + 28-core CPU | ~7–9 h |
 | **M3** | task4 (Boltz-2 co-fold) | A100 (40+ GB VRAM) | ~10 h |
 | **M4** | task5 (TBXT QSAR), task6 (T-box selectivity) | 28-core CPU | ~1.7 h (most stretch headroom) |
@@ -540,7 +540,7 @@ verifiable on May 9 morning via organizer-provided lookup.
 Drive's 24-h per-file 750 GB download quota tripped after multi-member testing.
 Migrated to HF Hub:
 
-- **HF dataset:** `anandsahuofficial/tbxt-hackathon-bundles` (public)
+- **HF dataset:** `<HF_USER>/<HF_REPO>` (public)
   - `tbxt_env.tar.gz` (9.66 GB, GPU-enabled CUDA 12.8)
   - `tbxt_data_bundle.tar.gz` (1.52 GB)
   - `tbxt_data_supplement.tar.gz` (2.1 MB, poses + ligands)
@@ -568,9 +568,9 @@ config) and live OUTSIDE any team-shared scope. Members never see them.
 12-h `ControlPersist` so DUO/Kerberos prompts only fire once per session.
 `HPC.sh submit-all` reuses the multiplexed connection for all 5 qsubs.
 
-**Project-space conda** — `/usr3/graduate/anandsah` is over the 10 GB BU SCC
+**Project-space conda** — `$HOME` is over the 10 GB BU SCC
 home quota (in 7-day grace at 10.99/10 GB). Conda must install in project
-space at `/projectnb/cui-buchem/anandsahu/Hackathon/miniconda3/`. All scripts
+space at `$TBXT_WORKDIR/miniconda3/`. All scripts
 now honor `$CONDA_DIR` (defaults to `$HOME/miniconda3` for laptops):
 - `setup_hf.sh`, `setup_check.sh`, `_variant_common.sh`, `HPC.sh`'s qsub
   generator
@@ -583,7 +583,7 @@ script with env name as argument). Simpler, no shell-hook dependency,
 works for both `conda create`d and `conda-pack`'d envs.
 
 **Verified end-to-end on SCC:**
-- Codebase rsync'd to `/projectnb/cui-buchem/anandsahu/Hackathon/`
+- Codebase rsync'd to `$TBXT_WORKDIR/`
 - Conda installed at `$REMOTE_BASE/miniconda3/`
 - `tbxt` env at `$REMOTE_BASE/miniconda3/envs/tbxt/`
 - `bin/gnina` extracted from data bundle
@@ -633,11 +633,11 @@ Plus:
    progress.
 
 3. **SCC stale state** — `ssh -O exit scc3.bu.edu` was run; ControlMaster
-   socket dropped. SCC may still have `/projectnb/cui-buchem/anandsahu/Hackathon/TBXT/containers/scratch`
+   socket dropped. SCC may still have `TBXT/containers/scratch`
    (~47 GB) and `cache` (~28 GB) holding singularity build temp.
    User should re-authenticate and clean:
    ```
-   ssh scc3.bu.edu "rm -rf /projectnb/cui-buchem/anandsahu/Hackathon/TBXT/containers/scratch /projectnb/cui-buchem/anandsahu/Hackathon/TBXT/containers/cache"
+   ssh scc3.bu.edu "rm -rf TBXT/containers/scratch TBXT/containers/cache"
    ```
 
 4. **Submission deliverables — LOCKED at end of Phase 9.** Final 4 picks
@@ -660,7 +660,7 @@ Plus:
 32bd7e8 Add on-day playbook + full-pool reachability audit
 eb3146f Phase 9: site-A docking integrated, onepot reachability scored, picks updated
 ```
-GitHub: `git@github.com:anandsahuofficial/Hackathon.git` branch `TBXT`.
+GitHub: `<PUBLIC_REPO_URL>` branch `TBXT`.
 
 **Files a fresh Claude session should re-read first:**
 1. `TBXT/PROGRESS.md` (this file) — phase log
@@ -941,12 +941,12 @@ Lift from `~/Hackathon/docs/HACKATHON_LEARNINGS.md` § 10 and adapt:
 | **TEAM_HANDOFF.md (winning plan)** | **✅** (Day 5c, 2026-05-08) — Tier-1/Tier-2 strategy, 11 moves, critical path, risk register |
 | **Dashboard structure: 12 task briefs + MEMBERS + LIVE_TRACKER** | **✅** (Day 5c, 2026-05-08) — `dashboard/00–11_*.md` |
 | **scripts/team/ helper scripts (5)** | **✅** (Day 5c, 2026-05-08) — multiseed GNINA, consensus, renders, onepot filter, setup_check |
-| **GitHub repo + push** | **✅** `git@github.com:anandsahuofficial/Hackathon.git` (private, branches `master` + `TBXT`) |
+| **GitHub repo + push** | **✅** `<PUBLIC_REPO_URL>` (private, branches `master` + `TBXT`) |
 | **Conda-pack + data bundle** | **✅** `tbxt_env.tar.gz` (9.9 GB) + `tbxt_data_bundle.tar.gz` (1.6 GB) at `tbxt_drive_local/` |
-| **Drive bundle uploaded (public, 4 file IDs)** | **✅** Folder `100ivRu-oFAL6fmvjqaHiBRaycGI3yP41`; IDs hardcoded in `setup.sh` |
+| **External asset bundle recorded in source archive (IDs redacted for public release)** | **✅** Folder `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID`; IDs removed from public `setup.sh`; provide via environment variables |
 | **One-shot installer `setup.sh` (path-portable)** | **✅** Tested in `/tmp/test_member` — `bash setup.sh` + `bash smoke_test.sh` end-to-end works |
 | **Smoke test (`tests/smoke_test.py` + wrapper)** | **✅** ~5 sec; covers 8 imports + RDKit→Vina→GNINA→QSAR pipeline |
-| **17 existing scripts refactored to be path-portable** | **✅** All hardcoded `/home/anandsahu/...` replaced with `Path(__file__).resolve().parents[1]` |
+| **17 existing scripts refactored to be path-portable** | **✅** All hardcoded absolute home-directory paths replaced with `Path(__file__).resolve().parents[1]` |
 | **`experiment_scripts/` — 10 self-contained `task<N>.sh`** | **✅** (Phase 6, 2026-05-08 evening) — 1 554 lines; member runs 4 commands (clone + setup + smoke + task<N>); checkpointing, --restart with backup, --test mode, --trial N isolation, JSON-only sharing |
 | **`pipeline_status.sh` (coordinator status reader)** | **✅** Reads only `report/*.json`; safe on bare machine; supports `--trial N` and `--all-trials` |
 | **All 10 task scripts validated via `--test`** | **✅** 5 OK + 2 FAIL + 2 PARTIAL — exactly reflecting actual prereq state |
@@ -1013,29 +1013,29 @@ Pivot from "individual research workspace" to "production handoff for a 10-perso
   - `render_poses.py` — Task 9; PyMOL 3D + RDKit 2D renders for the demo
   - `onepot_filter.py` — on-day; 3 mode stubs (catalog/api/manual) for Onepot membership filter
   - `setup_check.sh` — 12 portable post-install sanity checks
-- **GitHub repo**: `git@github.com:anandsahuofficial/Hackathon.git` (private, SSH). 77 files committed (code + docs only); `.gitignore` excludes 11 GB bundles, 2 GB GNINA binary, all docking poses, Boltz model intermediates, QSAR pickles, result CSVs. Branches: `master` (agnostic) + `TBXT` (event work). Latest commit `b97d5b3+`.
-- **Drive bundles** (public, anyone-with-link, no auth needed):
-  - Folder: `https://drive.google.com/drive/folders/100ivRu-oFAL6fmvjqaHiBRaycGI3yP41?usp=sharing`
+- **GitHub repo**: `<PUBLIC_REPO_URL>` (private, SSH). 77 files committed (code + docs only); `.gitignore` excludes 11 GB bundles, 2 GB GNINA binary, all docking poses, Boltz model intermediates, QSAR pickles, result CSVs. Branches: `master` (agnostic) + `TBXT` (event work). Latest commit `b97d5b3+`.
+- **External asset bundles** (public, anyone-with-link, no auth needed):
+  - Folder: `EXTERNAL_ASSET_BUNDLE_URL_REDACTED`
   - File IDs (hardcoded in `setup.sh`):
-    - `1G88JAl11RxbzrA_YJinC-ihF556oWYOo` = `tbxt_env.tar.gz` (9.9 GB)
-    - `1bIt-i083BhIqO83vGx2mHjFokUGhedQG` = `tbxt_data_bundle.tar.gz` (1.6 GB)
-    - `12K_DjcSEeaGojCHCEgMxYGQByIx48mQY` = `CHECKSUMS.sha256`
-    - `1Ob6cBitmqw3XcYIXnT1r7204niNUa5F8` = `MANIFEST_data_bundle.txt`
-  - Direct-download URL pattern: `https://drive.usercontent.google.com/download?id=<ID>&export=download&authuser=0&confirm=t` (works with wget/curl)
+    - `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID` = `tbxt_env.tar.gz` (9.9 GB)
+    - `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID` = `tbxt_data_bundle.tar.gz` (1.6 GB)
+    - `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID` = `CHECKSUMS.sha256`
+    - `REDACTED_PUBLIC_RELEASE_EXTERNAL_ASSET_ID` = `MANIFEST_data_bundle.txt`
+  - Direct-download URL pattern redacted for public release. Provide external asset IDs only if you control the files and have distribution rights.
 - **`setup.sh`** + **`smoke_test.sh`** + **`tests/smoke_test.py`**:
-  - `setup.sh`: clone repo → bootstrap miniconda if absent → download Drive bundles with SHA-256 verify → unpack env (conda-pack/conda-unpack) → unpack data → run `setup_check.sh`. Idempotent, resumable.
+  - `setup.sh`: clone repo → bootstrap miniconda if absent → download External asset bundles with SHA-256 verify → unpack env (conda-pack/conda-unpack) → unpack data → run `setup_check.sh`. Idempotent, resumable.
   - `smoke_test.sh`: thin wrapper that activates env + sets LD_LIBRARY_PATH + runs `tests/smoke_test.py`.
   - `tests/smoke_test.py`: 7-step end-to-end pipeline test (8 library imports + receptor file existence + RDKit 3D embed + Meeko PDBQT + Vina dock at site F + GNINA CNN re-score + QSAR predict). ~5 sec total.
 - **Member workflow** (verified in `/tmp/test_member` — works from any project root):
   ```bash
   mkdir -p /tmp/TEST_TBTX && cd /tmp/TEST_TBTX
-  git clone -b TBXT git@github.com:anandsahuofficial/Hackathon.git
+  git clone -b TBXT <PUBLIC_REPO_URL>
   cd Hackathon/TBXT
   bash setup.sh /tmp/TEST_TBTX
   bash smoke_test.sh
   ```
   ~15 min wall-clock first time (10 min Drive download), ~1 min if `TBXT_DOWNLOAD_CACHE` points at the local backup.
-- **Path-portability refactor**: every existing script (`scripts/*.py`, 17 files) had hardcoded `Path("/home/anandsahu/Hackathon/TBXT/...")`. Replaced via sed to `Path(__file__).resolve().parents[1] / "..."`. End-to-end verified: `scripts/dock.py` runs cleanly from `/tmp/test_member/Hackathon/TBXT/` and produces correct output.
+- **Path-portability refactor**: every existing script (`scripts/*.py`, 17 files) had hardcoded `Path("$HOME/Hackathon/TBXT/...")`. Replaced via sed to `Path(__file__).resolve().parents[1] / "..."`. End-to-end verified: `scripts/dock.py` runs cleanly from `/tmp/test_member/Hackathon/TBXT/` and produces correct output.
 - **Local Drive backup** at `TBXT/tbxt_drive_local/` (11 GB total, gitignored). Use via `TBXT_DOWNLOAD_CACHE=$HOME/Hackathon/TBXT/tbxt_drive_local bash setup.sh` to skip Drive re-download.
 
 **State at end of Day 5c (2026-05-08 evening):**

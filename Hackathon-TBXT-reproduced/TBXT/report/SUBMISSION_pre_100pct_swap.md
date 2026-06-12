@@ -4,7 +4,7 @@
 **Sites:** F (Y88 / D177 / L42 anchor — TBXT-unique residues) and A (dimerization-interface secondary site)
 **Receptor:** PDB 6F59 chain A (G177D variant)
 **Date:** 2026-05-09
-**Team lead:** Anand Sahu
+**Current reproduced-release lead:** Kemal Özkırşehirli
 
 > **v2 change vs locked SUBMISSION.md:** pick #2 swapped from `gen_0025` → `gen_0004` per `report/CONVERGENCE_AUDIT.md`. Same chemotype slot (Tanimoto 0.69), strictly better on every refinement signal (MMGBSA-MD, alchemical FEP, multi-seed pose stability), and resolves the gen_0025 sulfonamide onepot-CORE synthesis liability. All other picks unchanged.
 

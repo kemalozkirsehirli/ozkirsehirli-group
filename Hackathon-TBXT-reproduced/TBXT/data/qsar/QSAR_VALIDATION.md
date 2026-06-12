@@ -125,7 +125,7 @@ data/qsar/
 ## Usage
 
 ```bash
-source /home/anandsahu/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
+source $HOME/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
 cd ~/Hackathon/TBXT
 python scripts/parse_naar_spr.py       # rebuild training set
 python scripts/train_qsar.py           # train + predict on the 503-pool

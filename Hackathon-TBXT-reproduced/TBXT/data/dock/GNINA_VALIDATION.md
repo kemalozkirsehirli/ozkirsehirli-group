@@ -107,7 +107,7 @@ data/dock/GNINA_VALIDATION.md          # this file
 ## Usage
 
 ```bash
-source /home/anandsahu/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
+source $HOME/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
 cd ~/Hackathon/TBXT
 python scripts/dock_gnina.py --smiles-csv my_pool.csv --site F --out-dir gnina_out --exhaustiveness 8
 ```

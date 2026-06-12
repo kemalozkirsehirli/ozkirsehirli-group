@@ -1,7 +1,7 @@
 # Convergence Audit — Final 4 Picks
 
 **Date:** 2026-05-09 (T-0, submission 7 PM)
-**Author:** Anand Sahu (with cross-variant convergence over 10 evidence sources)
+**Curation:** TBXT Hackathon Team (with cross-variant convergence over 10 evidence sources). Public-release attribution is recorded in the repository root `AUTHORS.md`.
 **Variants integrated:** original site-F pipeline · v1 onepot-friendly gen · v3-LOCAL ensemble (4 receptors) · v3-SCC ensemble · v4 MMGBSA-MD top-30 · v4 alchemical-style ΔΔG · v5 site-G dock · original Boltz top-30 · Jack full-pool Boltz (570/570 parsed) · Mark multi-seed gnina (570/570 with 10 seeds) · Rabia parallel v1 onepot
 
 ---

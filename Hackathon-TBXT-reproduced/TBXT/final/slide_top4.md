@@ -138,7 +138,7 @@ Tiered (T1 GOLD: 0 — empty by design, honest finding · T2 SILVER: 16 · T3 BR
 
 ## Reproducibility + bundle
 
-- **GitHub:** `git@github.com:anandsahuofficial/Hackathon.git` branch `TBXT`
+- **GitHub:** `<PUBLIC_REPO_URL>` branch `TBXT`
 - **Single-command setup:** `bash TBXT/setup_hf.sh`
 - **All 24 team picks** (top 4 + 20 additional): `TBXT/final/top4.csv` + `TBXT/final/top5to24.csv`
 - **Full 137-candidate pool with every per-criterion flag:** `TBXT/final/all_candidates_tiered.csv`

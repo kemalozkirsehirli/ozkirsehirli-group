@@ -1,29 +1,25 @@
-# MAINTAINERS
+# Maintainers
 
-This file defines current maintainership for the reproduced GitHub release.
+## Current public repository maintainer/contact
 
-## Current maintainer
+- Kemal Özkırşehirli - Student Principal Investigator, Özkırşehirli Group and TBXT Small-Molecule Hackathon; project lead for the public research release.
 
-- Kemal Özkırşehirli / Özkırşehirli Group
-  - Role: Student Principal Investigator / project lead; maintaining lead of the
-    reproduced TBXT research repository.
-  - Scope: repository governance, public release decisions, issue triage,
-    licensing workflow, research roadmap, and future development of this
-    reproduced release.
+## Scope of maintainership
 
-## Non-current maintainers
+Maintainer status means administrative responsibility for this public GitHub repository, including:
 
-- Anand Sahu is preserved as a historical contributor/co-owner where applicable,
-  but is not listed as a maintainer of this reproduced release.
+- accepting or rejecting pull requests;
+- tagging public releases;
+- editing repository documentation;
+- managing issues and discussions;
+- responding to licensing and attribution questions to the extent of the maintainer's rights and knowledge.
 
-## Governance notes
+Maintainer status does **not** adjudicate copyright ownership, patent ownership, inventorship, institutional rights, employment status, contract rights, or external disputes.
 
-- Historical files may contain old task labels, private repository URLs,
-  hardcoded local paths, or role descriptions from the original archive. Those
-  are preserved for reproducibility and provenance.
-- Current maintainership is defined by this file, AUTHORS.md, CONTRIBUTORS.md,
-  NOTICE, and LICENSE.
-- Personnel disputes or conduct allegations should not be litigated in public
-  repository metadata. Keep public statements limited to current maintainership,
-  contribution attribution, and reproducibility facts unless counsel advises
-  otherwise.
+## Historical contributors
+
+Historical contributors remain credited in `AUTHORS.md`, `CONTRIBUTORS.md`, source comments, notebooks, reports, and preserved archive materials where applicable. Attribution is separate from current GitHub write access.
+
+## GitHub code ownership
+
+GitHub code ownership can be configured after the repository is created by editing `.github/CODEOWNERS`. This public-ready ZIP ships with a comment-only CODEOWNERS file so that it can be pushed without invalid placeholders.

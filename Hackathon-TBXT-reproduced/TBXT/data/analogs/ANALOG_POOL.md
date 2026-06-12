@@ -86,7 +86,7 @@ data/analogs/
 ## On-day usage
 
 ```bash
-source /home/anandsahu/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
+source $HOME/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
 cd ~/Hackathon/TBXT
 
 # Step 1 (on-day): filter by Onepot library membership

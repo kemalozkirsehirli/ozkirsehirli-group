@@ -81,7 +81,7 @@ CF Labs hits hit 4–6 site A anchors (S89, L91, V173, R180 most frequent); D203
 
 ### Activate env
 ```bash
-source /home/anandsahu/miniconda3/etc/profile.d/conda.sh
+source $HOME/miniconda3/etc/profile.d/conda.sh
 conda activate tbxt
 cd ~/Hackathon/TBXT
 ```

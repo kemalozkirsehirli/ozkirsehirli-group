@@ -22,7 +22,7 @@ out of scope, so we drive the real client.
 
 SETUP (run on the user's laptop, not on a headless HPC node)
 ------------------------------------------------------------
-    # in the project conda env (e.g. /home/anandsahu/miniconda3/envs/tbxt)
+    # in the project conda env (e.g. $HOME/miniconda3/envs/tbxt)
     pip install playwright
     playwright install chromium
 

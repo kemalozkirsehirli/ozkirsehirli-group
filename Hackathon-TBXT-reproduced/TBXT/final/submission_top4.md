@@ -4,7 +4,7 @@
 **Sites:** F (Y88 / D177 / L42 anchor — TBXT-unique residues)
 **Receptor:** PDB 6F59 chain A (G177D variant)
 **Date:** 2026-05-09
-**Project lead / methodology / live demo:** Anand Sahu
+**Current reproduced-release lead / CADD-AI workflow:** Kemal Özkırşehirli
 
 This file is the **hackathon-judging submission for the 4 ranked picks**.
 The 20 additional team submissions (experimental program first batch)
@@ -92,8 +92,8 @@ medium-risk.
 
 ## Reproducibility
 
-- **GitHub:** `git@github.com:anandsahuofficial/Hackathon.git` branch `TBXT`
-- **HF dataset bundles:** `anandsahuofficial/tbxt-hackathon-bundles`
+- **GitHub:** `<PUBLIC_REPO_URL>` branch `TBXT`
+- **HF dataset bundles:** `<HF_USER>/<HF_REPO>`
 - **Single-command setup for any teammate:** `bash TBXT/setup_hf.sh`
 - **All 137 candidates with per-criterion flags:** `TBXT/final/all_candidates_tiered.csv`
 - **Full rationale + tier definitions:** `TBXT/final/tiered/TIERED_CANDIDATES_RATIONALE.md`

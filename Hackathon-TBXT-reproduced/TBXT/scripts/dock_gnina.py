@@ -44,7 +44,7 @@ GRID_DEFS = DOCK / "grid_definitions.json"
 GNINA_BIN = Path(os.environ.get("GNINA_BIN",
     str(Path(__file__).resolve().parents[1] / "bin/gnina")))
 
-CONDA_PREFIX = os.environ.get("CONDA_PREFIX", "/home/anandsahu/miniconda3/envs/tbxt")
+CONDA_PREFIX = os.environ.get("CONDA_PREFIX", "$HOME/miniconda3/envs/tbxt")
 
 
 def smiles_to_pdbqt(smiles: str, out_path: Path) -> bool:

@@ -16,7 +16,7 @@
 #   bash setup_hf.sh --force               # re-extract everything regardless of SHA
 #   TBXT_ROOT=/data/h/Hackathon bash setup_hf.sh
 #
-# Override the HF source repo (default = anandsahuofficial/tbxt-hackathon-bundles):
+# Configure the HF source repo if you have mirrored the large bundles:
 #   HF_USER=someuser HF_REPO=my-bundles bash setup_hf.sh
 #
 # For PRIVATE HF repos, set HF_TOKEN (Hugging Face access token):
@@ -51,6 +51,7 @@ for arg in "$@"; do
 done
 
 # ─── Configuration ─────────────────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TBXT_ROOT="${TBXT_ROOT:-${POSITIONAL_ARG:-$HOME}}"
 CLONE_DIR="$TBXT_ROOT/Hackathon"
 PROJECT_DIR="$CLONE_DIR/TBXT"
@@ -60,16 +61,21 @@ ENV_DIR="$CONDA_DIR/envs/$ENV_NAME"
 DOWNLOAD_CACHE="${TBXT_DOWNLOAD_CACHE:-$HOME/.tbxt_hf_cache}"
 
 # Hugging Face dataset source (override via env vars if needed).
-HF_USER="${HF_USER:-anandsahuofficial}"
-HF_REPO="${HF_REPO:-tbxt-hackathon-bundles}"
+HF_USER="${HF_USER:-}"
+HF_REPO="${HF_REPO:-}"
 HF_BRANCH="${HF_BRANCH:-main}"
+if [ -z "$HF_USER" ] || [ -z "$HF_REPO" ]; then
+  echo "[setup-hf] ERROR: HF_USER and HF_REPO must be set for public bundle download." >&2
+  echo "Example: HF_USER=your-user HF_REPO=tbxt-hackathon-bundles bash setup_hf.sh" >&2
+  exit 1
+fi
 HF_BASE_URL="https://huggingface.co/datasets/${HF_USER}/${HF_REPO}/resolve/${HF_BRANCH}"
 # Optional token for private repos. If unset, anonymous public download is used.
 HF_TOKEN="${HF_TOKEN:-}"
 
-REPO_URL="git@github.com:anandsahuofficial/Hackathon.git"
-REPO_HTTPS="https://github.com/anandsahuofficial/Hackathon.git"
-BRANCH="TBXT"
+REPO_URL="${TBXT_REPO_URL:-}"
+REPO_HTTPS="${TBXT_REPO_HTTPS:-}"
+BRANCH="${TBXT_BRANCH:-main}"
 
 # ─── Helpers ────────────────────────────────────────────────────────────────
 log() { printf "\n[\033[36msetup-hf\033[0m %s] %s\n" "$(date +%H:%M:%S)" "$*"; }
@@ -192,27 +198,32 @@ else
   log "Miniconda already present at $CONDA_DIR"
 fi
 
-# ─── Step 2: clone / update the repo ────────────────────────────────────────
-log "Setting up repo at $CLONE_DIR..."
-mkdir -p "$TBXT_ROOT"
-if [ -d "$CLONE_DIR/.git" ]; then
-  log "  repo exists; pulling latest"
-  (cd "$CLONE_DIR" && git fetch --all --quiet && git checkout "$BRANCH" --quiet && git pull --quiet) || true
-  (cd "$CLONE_DIR" && git checkout "$BRANCH" 2>/dev/null) || true
-elif [ -f "$PROJECT_DIR/setup_hf.sh" ] && [ -d "$PROJECT_DIR/scripts" ]; then
-  # Codebase pre-staged (e.g., rsync'd in from elsewhere). Skip git ops —
-  # this lets HPC nodes run setup_hf.sh against an rsync'd tree without
-  # needing GitHub credentials. Members on their laptops still get the
-  # normal clone path because their fresh checkout will not have these files.
-  log "  codebase pre-staged at $PROJECT_DIR (no .git — skipping clone)"
-else
-  if ! git clone "$REPO_URL" "$CLONE_DIR" 2>/dev/null; then
-    log "  SSH clone failed, trying HTTPS..."
+# ─── Step 2: locate / optionally clone the repo ──────────────────────────────
+log "Locating repository..."
+
+# Public-release behavior:
+# - If this script is run from inside a cloned repository, use that checkout.
+# - If no checkout exists at $CLONE_DIR, set TBXT_REPO_URL or TBXT_REPO_HTTPS to clone one.
+# This avoids hardcoding a former private upstream repository in the public release.
+if [ -f "$SCRIPT_DIR/tests/smoke_test.py" ] && [ -d "$SCRIPT_DIR/scripts" ]; then
+  PROJECT_DIR="$SCRIPT_DIR"
+  CLONE_DIR="$(dirname "$PROJECT_DIR")"
+  log "  using current checkout: $PROJECT_DIR"
+elif [ ! -d "$CLONE_DIR/.git" ]; then
+  mkdir -p "$TBXT_ROOT"
+  if [ -n "$REPO_URL" ]; then
+    git clone "$REPO_URL" "$CLONE_DIR"
+  elif [ -n "$REPO_HTTPS" ]; then
     git clone "$REPO_HTTPS" "$CLONE_DIR"
+  else
+    err "No checkout found at $CLONE_DIR and no TBXT_REPO_URL/TBXT_REPO_HTTPS provided. Clone the public GitHub repository first, then run TBXT/$(basename "$0")."
   fi
-  (cd "$CLONE_DIR" && git checkout "$BRANCH" 2>/dev/null) || true
+else
+  log "  repo exists; pulling latest when possible"
+  (cd "$CLONE_DIR" && git fetch --all --quiet && git checkout "$BRANCH" --quiet && git pull --quiet) || true
 fi
-[ -d "$PROJECT_DIR" ] || err "PROJECT_DIR ($PROJECT_DIR) not found after clone or staging"
+
+[ -d "$PROJECT_DIR" ] || err "PROJECT_DIR ($PROJECT_DIR) not found"
 
 # ─── Step 3: download bundles from HF ───────────────────────────────────────
 mkdir -p "$DOWNLOAD_CACHE"

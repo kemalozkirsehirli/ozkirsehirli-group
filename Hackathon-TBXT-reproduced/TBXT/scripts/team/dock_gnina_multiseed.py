@@ -37,7 +37,7 @@ DOCK = Path(__file__).resolve().parents[2] / "data" / "dock"
 RECEPTOR_PDBQT = DOCK / "receptor" / "6F59_apo.pdbqt"
 GRID_DEFS = DOCK / "grid_definitions.json"
 GNINA_BIN = Path(__file__).resolve().parents[2] / "bin" / "gnina"
-CONDA_PREFIX = os.environ.get("CONDA_PREFIX", "/home/anandsahu/miniconda3/envs/tbxt")
+CONDA_PREFIX = os.environ.get("CONDA_PREFIX", "$HOME/miniconda3/envs/tbxt")
 
 MODE_LINE_RE = re.compile(r"^\s*(\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(\d+\.\d+)\s+(\d+\.\d+)\s*$")
 

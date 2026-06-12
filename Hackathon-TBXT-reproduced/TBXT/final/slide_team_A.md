@@ -91,6 +91,6 @@ All 4 picks: 100% onepot.ai catalog match · strictly non-covalent · Tanimoto <
 
 ## Reproducibility
 
-- **GitHub:** `git@github.com:anandsahuofficial/Hackathon.git` branch `TBXT`
+- **GitHub:** `<PUBLIC_REPO_URL>` branch `TBXT`
 - **All 137 candidates with per-criterion flags:** `TBXT/final/all_candidates_tiered.csv`
 - **Team-wide table:** `TBXT/final/team_submissions.md`

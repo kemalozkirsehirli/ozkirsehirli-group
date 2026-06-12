@@ -2,7 +2,7 @@
 
 Created: 2026-06-12
 
-Source archive: `Hackathon-TBXT 2.zip`
+This repository was reproduced from the supplied `Hackathon-TBXT` archive and prepared as a public GitHub-ready release with the original root folder name preserved as `Hackathon-TBXT/`.
 
 Source archive SHA256:
 
@@ -10,33 +10,39 @@ Source archive SHA256:
 62e6d4d41d9e7032ba2e5dbe7e6f8aba73403ecc6e44a5717127845c8133740c
 ```
 
-Processing performed:
+## Cleaning performed
 
-1. Safely extracted the uploaded ZIP.
-2. Removed macOS metadata that should not be committed to GitHub:
-   - `__MACOSX/`
-   - AppleDouble resource-fork files named `._*`
-   - `.DS_Store`
-3. Preserved all substantive project files from the archive.
-4. Added GitHub publication helper files:
-   - `PUBLISH_TO_GITHUB.md`
-   - `PUBLISH_TO_GITHUB.sh`
-   - `CONTRIBUTORS.md`
-   - `LICENSE_PENDING.md`
-   - `REPO_MANIFEST.txt`
-   - `.gitattributes`
-5. Ran syntax-only validation:
-   - Python: `py_compile` on all `.py` files.
-   - Shell: `bash -n` on all `.sh` files.
+Removed only non-substantive macOS metadata:
 
-No project scripts were executed. Syntax checks do not validate scientific correctness, external dependencies, private bundle availability, or runtime access to Google Drive / Hugging Face / GitHub resources.
+- `__MACOSX/`
+- AppleDouble `._*` files
+- `.DS_Store` files
 
-Important repository note:
+No scientific source files, reports, dashboards, data summaries, figures, or slide/PDF artifacts were intentionally removed.
 
-The included `.gitignore` intentionally ignores many generated data/result paths to prevent huge regenerated artifacts from being accidentally committed. Because this reproduced ZIP intentionally includes some small data and result artifacts, use `PUBLISH_TO_GITHUB.sh` or the `git add -f --pathspec-from-file=REPO_MANIFEST.txt` command in `PUBLISH_TO_GITHUB.md` for the initial commit.
+## Public-release adjustments
 
-Archive entry count: 602
+- Added `LICENSE`, `NOTICE.md`, `AUTHORS.md`, `CONTRIBUTORS.md`, `MAINTAINERS.md`, `GOVERNANCE.md`, `GOVERNANCE_AND_ATTRIBUTION.md`, `CODE_OF_CONDUCT.md`, `THIRD_PARTY_AND_DATA_NOTICE.md`, and `CITATION.cff`.
+- Removed invalid pre-public placeholders from `CITATION.cff`, `.github/CODEOWNERS`, and maintainer docs.
+- Replaced obsolete private-upstream GitHub URLs and legacy local machine paths in text files with public-release references.
+- Updated public-facing submission/slide text to identify Kemal Özkırşehirli as current reproduced-release lead while preserving historical-contributor attribution in the governance files.
+- Patched final PDF slide artifacts where obsolete private GitHub links or old project-lead title text appeared.
+- Generated a plain `REPO_MANIFEST.txt` suitable for `git add -f --pathspec-from-file=REPO_MANIFEST.txt`.
 
-Removed metadata entry count: 308
+## Validation performed
 
-Final repository file count: 262
+- ZIP integrity test.
+- macOS metadata scan.
+- placeholder scan for GitHub-critical fields.
+- Python syntax compilation check.
+- Bash syntax check.
+- dry-run `git add -f --pathspec-from-file=REPO_MANIFEST.txt` check in a temporary Git repository.
+
+## Reproduction scope
+
+The repository package preserves and republishes the source tree and artifacts. It does not assert that every docking, QSAR, Boltz, MMGBSA/FEP, or external-service result was recomputed end-to-end during this packaging pass.
+
+
+## Lower-risk public-release pass
+
+A later public-release pass removed personal-allegation language, avoided sole-ownership claims, separated attribution from repository maintainership, redacted hardcoded external Google Drive IDs, and neutralized former private/local path references where practical. See `PUBLIC_RELEASE_SAFETY_NOTES.md`.

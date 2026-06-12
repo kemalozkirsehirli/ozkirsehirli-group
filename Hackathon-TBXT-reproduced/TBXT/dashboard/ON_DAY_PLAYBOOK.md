@@ -37,8 +37,8 @@ Get to Pillar VC ~12:30 pm to claim a good seat with power + Wi-Fi.
 3. **Browser tabs to open in advance:**
    - https://luma.com/n9hheb8j (event page — submission link likely posted here)
    - https://tbxtchallenge.org/?utm_source=luma#prizes (prize info)
-   - https://huggingface.co/datasets/anandsahuofficial/tbxt-hackathon-bundles (our bundles)
-   - https://github.com/anandsahuofficial/Hackathon (our repo)
+   - https://huggingface.co/datasets/<HF_USER>/<HF_REPO> (our bundles)
+   - <PUBLIC_REPO_URL> (public repo)
    - https://www.muni.bio (sign up at venue if not done)
    - https://labs.rowansci.com/create-account (Rowan free credits)
 

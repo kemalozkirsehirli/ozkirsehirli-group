@@ -11,5 +11,5 @@ Then confirm what you understand about the event and the work-in-progress before
 
 To resume the analysis env:
 ```
-source /home/anandsahu/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
+source $HOME/miniconda3/etc/profile.d/conda.sh && conda activate tbxt
 ```

@@ -1,7 +1,7 @@
 # Top 4 Final Picks — Rationale (live demo to judges)
 
 **Submission:** TBXT Hit Identification Hackathon · 2026-05-09 · Pillar VC, Boston
-**Project lead:** Anand Sahu
+**Current reproduced-release lead:** Kemal Özkırşehirli
 
 These 4 compounds are the team's primary hackathon-judging entry. They sit
 at ranks 1-4 of a 137-compound pool that strictly satisfies every

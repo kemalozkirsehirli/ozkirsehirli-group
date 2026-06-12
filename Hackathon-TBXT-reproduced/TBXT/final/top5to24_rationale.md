@@ -1,7 +1,7 @@
 # Top 5-24 — Rationale (20 additional submissions)
 
 **Submission:** TBXT Hit Identification Hackathon · 2026-05-09 · Pillar VC, Boston
-**Project lead:** Anand Sahu
+**Current reproduced-release lead:** Kemal Özkırşehirli
 
 These 20 compounds are the team's additional submissions beyond the
 hackathon-judging top 4. Together with `top4.csv`, this forms the

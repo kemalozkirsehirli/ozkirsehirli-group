@@ -2,25 +2,24 @@
 set -euo pipefail
 
 REMOTE_URL="${1:-}"
-GIT_NAME="${2:-}"
+GIT_NAME="${2:-Kemal Özkırşehirli}"
 GIT_EMAIL="${3:-}"
 BRANCH="${BRANCH:-main}"
 
 usage() {
   cat <<'EOF'
 Usage:
-  bash PUBLISH_TO_GITHUB.sh <remote-url> "Your Name" "your.email@example.com"
+  bash PUBLISH_TO_GITHUB.sh <remote-url> "Kemal Özkırşehirli" "YOUR_GIT_EMAIL"
 
-Example SSH:
-  bash PUBLISH_TO_GITHUB.sh git@github.com:YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git "Your Name" "you@example.com"
-
-Example HTTPS:
-  bash PUBLISH_TO_GITHUB.sh https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git "Your Name" "you@example.com"
+Examples:
+  bash PUBLISH_TO_GITHUB.sh git@github.com:OWNER/Hackathon-TBXT.git "Kemal Özkırşehirli" "YOUR_GIT_EMAIL"
+  bash PUBLISH_TO_GITHUB.sh https://github.com/OWNER/Hackathon-TBXT.git "Kemal Özkırşehirli" "YOUR_GIT_EMAIL"
 EOF
 }
 
-if [ -z "$REMOTE_URL" ]; then
+if [ -z "$REMOTE_URL" ] || [ -z "$GIT_EMAIL" ]; then
   usage
+  echo "ERROR: remote URL and git email are required." >&2
   exit 1
 fi
 
@@ -31,34 +30,25 @@ if [ ! -f REPO_MANIFEST.txt ]; then
   exit 1
 fi
 
+# Refuse to use a Markdown manifest; REPO_MANIFEST.txt must be pure pathspec lines.
+if grep -q '^#\|^- `\|^## ' REPO_MANIFEST.txt; then
+  echo "ERROR: REPO_MANIFEST.txt must contain only relative file paths, one per line." >&2
+  exit 1
+fi
+
 git init
-# Works for both newly initialized repos and existing local repos.
 git checkout -B "$BRANCH"
 
-if [ -n "$GIT_NAME" ]; then
-  git config user.name "$GIT_NAME"
-fi
-if [ -n "$GIT_EMAIL" ]; then
-  git config user.email "$GIT_EMAIL"
-fi
+git config user.name "$GIT_NAME"
+git config user.email "$GIT_EMAIL"
 
-if ! git config user.name >/dev/null; then
-  echo "ERROR: git user.name is not set. Pass it as the second argument or run: git config user.name 'Your Name'" >&2
-  exit 1
-fi
-if ! git config user.email >/dev/null; then
-  echo "ERROR: git user.email is not set. Pass it as the third argument or run: git config user.email 'you@example.com'" >&2
-  exit 1
-fi
-
-# Force-add the reproduction manifest because the original .gitignore excludes
-# several generated data/report paths that are intentionally included here.
+# Force-add preserved artifacts because the original .gitignore excludes some generated paths.
 git add -f --pathspec-from-file=REPO_MANIFEST.txt
 
 if git diff --cached --quiet; then
   echo "No staged changes to commit."
 else
-  git commit -m "License and reproduce TBXT hackathon research repository"
+  git commit -m "Release TBXT hackathon research repository"
 fi
 
 if git remote get-url origin >/dev/null 2>&1; then

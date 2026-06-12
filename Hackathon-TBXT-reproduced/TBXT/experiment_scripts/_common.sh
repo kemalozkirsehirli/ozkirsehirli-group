@@ -11,7 +11,7 @@
 #   6. Does the actual work (calling run_python, writing checkpoints)
 #   7. Calls _end OK or _end FAIL          — writes the report JSON and closes the log
 #
-# Patterns adopted from /home/anandsahu/ResearchWorks/EDL/codebase/experiment_scripts/edl_pipeline.sh
+# Patterns adopted from $HOME/ResearchWorks/EDL/codebase/experiment_scripts/edl_pipeline.sh
 # (backup_if_exists, _step_begin/_step_end, skip-if-OK, log scraping for warnings/errors).
 
 set -euo pipefail

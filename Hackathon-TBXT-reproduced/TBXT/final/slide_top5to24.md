@@ -8,7 +8,7 @@ paginate: true
 
 **Experimental program first batch** (Sept 1 deadline)
 
-Anand Sahu — TBXT Hackathon, 2026-05-09
+Kemal Özkırşehirli — TBXT Hackathon, 2026-05-09
 
 These 20 compounds + the top 4 (`slide_top4.md`) = **24-compound team submission**
 

@@ -33,7 +33,7 @@ style: |
 
 <br/>
 
-**Anand Sahu** · Project lead, methodology, live demo
+**Kemal Özkırşehirli** · Student PI, project lead, CADD/AI workflow
 
 TBXT Hackathon · Pillar VC Boston · 2026-05-09
 
@@ -314,7 +314,7 @@ Rowan MD blocked by credit tier. Substitute: Mark's 10-seed GNINA + dual-engine 
 
 ## Reproducibility
 
-- **GitHub:** `git@github.com:anandsahuofficial/Hackathon.git` branch `TBXT`
+- **GitHub:** `<PUBLIC_REPO_URL>` branch `TBXT`
 - **Single-command setup:** `bash TBXT/setup_hf.sh`
 - **All 137 candidates with per-criterion flags:** `TBXT/final/all_candidates_tiered.csv`
 - **24-pick team submission:** `TBXT/final/top4.csv` + `top5to24.csv`

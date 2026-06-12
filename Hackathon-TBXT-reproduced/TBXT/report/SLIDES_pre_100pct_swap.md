@@ -8,7 +8,7 @@ paginate: true
 
 **Multi-signal consensus pipeline for chordoma's master regulator**
 
-Anand Sahu — TBXT Hackathon, Pillar VC Boston, May 9, 2026
+Kemal Özkırşehirli — TBXT Hackathon, Pillar VC Boston, May 9, 2026
 
 Target: TBXT G177D (Brachyury) · PDB 6F59 chain A · Site F (Y88 / D177 / L42)
 
@@ -184,8 +184,8 @@ We've prioritized **rationale and judgment over raw affinity claims**.
 
 ## Reproducibility
 
-- **GitHub:** `git@github.com:anandsahuofficial/Hackathon.git` branch `TBXT`
-- **HF dataset bundles:** `anandsahuofficial/tbxt-hackathon-bundles` (env + data + 570 docked poses + checksums)
+- **GitHub:** `<PUBLIC_REPO_URL>` branch `TBXT`
+- **HF dataset bundles:** `<HF_USER>/<HF_REPO>` (env + data + 570 docked poses + checksums)
 - Single-command setup for any teammate: `bash TBXT/setup_hf.sh`
 - Top-100 ranked CSV + final-4 picks CSV (v2) + per-pick rationale + CONVERGENCE_AUDIT.md all in `TBXT/report/`
 - T-0 snapshot frozen under `data/snapshots/post-prod/`
