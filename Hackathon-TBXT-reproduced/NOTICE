@@ -1,0 +1,23 @@
+# NOTICE
+
+Project: TBXT Hackathon Research Repository - Reproduced Release
+Maintaining project lead: Kemal Özkırşehirli / Özkırşehirli Group
+License: TBXT Research Source License v1.0, see LICENSE
+
+This repository is a cleaned and reproduced release of the supplied
+`Hackathon-TBXT` research archive for continued TBXT/brachyury small-molecule
+hit-identification work.
+
+The reproduced release preserves substantive project content, historical
+provenance, and contributor attributions while removing only operating-system
+metadata such as `__MACOSX/`, AppleDouble `._*`, and `.DS_Store` files.
+
+Historical references to prior private repositories, local paths, Hugging Face
+locations, team roles, or named individuals are preserved where they are part of
+archival project records. They should not be read as current repository
+governance, current maintainership, endorsement, institutional approval, or a
+complete adjudication of authorship or ownership.
+
+No affiliation or endorsement by MIT, Pillar VC, onepot, hackathon organizers,
+external model providers, data providers, or any institution is implied unless
+separately stated in writing by that entity.

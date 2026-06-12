@@ -1,0 +1,18 @@
+O=C(O)COCc1ccc(-c2ccsc2)cc1  Arup
+Cc1ccccc1COc1cccc(N)c1
+O=C(Nc1cccc(Br)c1)Nc1cccc(Br)c1
+NC(=O)Nc1cccc(OCc2ccccc2)c1
+Nc1cccc(OCc2ccc(-c3ccncc3)cc2)c1
+O=C(NCc1ccncc1)Nc1cccc(Br)c1
+O=C(O)c1cc(-c2ccsc2)ccc1OC(F)(F)F
+O=C(Nc1cccc(Br)c1)c1ccc(Cl)cc1
+O=C(Nc1ccccc1)Nc1cccc(Br)c1
+O=C(Nc1cccc(Br)c1)C1Cc2ccccc2O1
+O=C(Nc1cccc(Br)c1)NC1CC1
+O=C(O)c1cc(-c2ccncc2)ccc1OC(F)(F)F
+Nc1cccc(-c2cccc(C(F)(F)F)c2)c1
+FC(F)(F)c1cccc(Nc2ccccc2)c1
+Fc1ccc(-c2cccc(C(F)(F)F)c2)cc1
+FC(F)(F)c1cccc(NCc2ccncc2)c1
+Nc1cccc(-c2cccc(N)c2)c1
+FC(F)(F)c1cccc(-c2ccccc2)c1

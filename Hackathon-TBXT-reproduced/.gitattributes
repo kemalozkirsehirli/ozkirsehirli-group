@@ -1,0 +1,10 @@
+# Normalize text files across platforms while keeping binary artifacts safe.
+* text=auto
+*.png binary
+*.pdf binary
+*.gz binary
+*.zip binary
+*.pkl binary
+LICENSE text eol=lf
+NOTICE text eol=lf
+*.cff text eol=lf
